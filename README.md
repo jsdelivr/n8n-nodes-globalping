@@ -1,57 +1,49 @@
-# n8n-nodes-globalping
+# @globalping/n8n-nodes-globalping
+This is an n8n community node. It lets you use [Globalping](https://globalping.io/) in your n8n workflows.
 
-This is an n8n community node. It lets you use Globalping API in your n8n workflows.
-
-The Globalping API node allows you to perform network measurements such as ping, traceroute, mtr, http and DNS lookups from a specified location. Use this node to test network connections or troubleshoot connectivity issues from various regions.
-
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
+The Globalping node allows you to perform network measurements such as `ping`, `traceroute`, `mtr`, `http` and `DNS` lookups from a specified location. 
+You can use this node to test network connections, do latency checks or troubleshoot connectivity issues from various regions.
 
 [Installation](#installation)  
 [Operations](#operations)  
-[Credentials](#credentials)  <!-- delete if no auth needed -->  
-[Compatibility](#compatibility)  
-[Usage](#usage)  <!-- delete if not using this section -->  
-[Resources](#resources)  
-[Version history](#version-history)  <!-- delete if not using this section -->
+[Credentials](#credentials)
+[Usage](#usage) 
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+1. Go to n8n Settings in bottom left
+2. Select "Community nodes"
+3. Enter `@globalping/n8n-nodes-globalping` and install
+
+<img width="673" alt="n8n globalping" src="https://github.com/user-attachments/assets/1772ec9d-e5a5-47f8-983f-31e8f33a9c9a">
+
 
 ## Operations
+
+- All measurements support both IPv4 and IPv6 endpoints, as long as you manually enable it per measurement.
+- The location field is smart enough to accept many different types of inputs. [Learn more about the magic location field](https://github.com/jsdelivr/globalping?tab=readme-ov-file#test-with-magic-).
+- While the Globalping network is large and is constantly expanding we can't guarantee a probe in every single location. [Explore our online probes on our website](https://globalping.io/network)
+
  1. Measurements:
-   - ```Ping``` - creates a new measurement with type ```ping```. Set parameters according to [API docs](https://globalping.io/docs/api.globalping.io#tag--Measurements). Set ```Attempts```, the maximum number of requests required to retrieve a measurement. Set ```Timeout```, timeout duration (in seconds) between attempts.
-   - ```Traceroute``` - creates a new measurement with type ```traceroute```. Set parameters according to [API docs](https://globalping.io/docs/api.globalping.io#tag--Measurements). Set ```Attempts```, the maximum number of requests required to retrieve a measurement. Set ```Timeout```, timeout duration (in seconds) between attempts.
-   - ```DNS``` - creates a new measurement with type ```dns```. Set parameters according to [API docs](https://globalping.io/docs/api.globalping.io#tag--Measurements). Set ```Attempts```, the maximum number of requests required to retrieve a measurement. Set ```Timeout```, timeout duration (in seconds) between attempts.
-   - ```MTR``` - creates a new measurement with type ```mtr```. Set parameters according to [API docs](https://globalping.io/docs/api.globalping.io#tag--Measurements). Set ```Attempts```, the maximum number of requests required to retrieve a measurement. Set ```Timeout```, timeout duration (in seconds) between attempts.
-   - ```HTTP``` - creates a new measurement with type ```http```. Set parameters according to [API docs](https://globalping.io/docs/api.globalping.io#tag--Measurements). Set ```Attempts```, the maximum number of requests required to retrieve a measurement. Set ```Timeout```, timeout duration (in seconds) between attempts.
+   - ```Ping``` - Ping an endpoint using ICMP. Default 3 packets.
+   - ```Traceroute``` - Traceroute an endpoint using ICMP, TCP or UDP on any port. 
+   - ```DNS``` - Resolve a DNS record of any type. By default the local resolver is used but a different one can be provided. For troubleshooting purposes the `trace` function can be enabled.
+   - ```MTR``` - MTR an endpoint using ICMP, TCP or UDP on any port. 
+   - ```HTTP``` - Make an HTTP GET or HEAD request to any URL. Responses are limited to first 10kb. Note that the `Host` and `User-Agent` headers are reserved and internally overridden.
  2. Probes
 	 - ```List``` - returns a list of all probes currently online and their metadata such as location and assigned tags.
  3. Limits
-	 - ```List``` - returns rate limits for the current user if authenticated or ip address if not authenticated.
+	 - ```List``` - returns rate limits for the current user if authenticated or IP address if not authenticated.
 
 ## Credentials
 
-The API is public, free to use, and doesn't require authentication. However, it implements rate limits to ensure fair usage and reliability, and some of the limits are higher for authenticated users. Sign up on the [Globalping Dashboard](https://dash.globalping.io/) to enjoy the higher limits.
+Globalping is free to use, and doesn't require authentication. However, it implements rate limits to ensure fair usage and reliability. 
+Sign up on the [Globalping Dashboard](https://dash.globalping.io/) to enjoy higher limits. [Learn more about limits](https://globalping.io/credits).
 
-If you have a token you should set ```Access token``` in ```Credentials``` of your workflow.
-
-## Compatibility
-
-```n8n``` version ```1.50.1``` or higher
+To take advantage of the higher limits you need to generate a token in the dashboard and store it in n8n by setting ```Access token``` in ```Credentials``` of your workflow.
 
 ## Usage
 
  Create a workflow and add Globalping node with operation you need.
 
-## Resources
-
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
-* [Globalping API documentation](https://globalping.io/docs/api.globalping.io)
-* [Globalping Dashboard](https://dash.globalping.io/)
-
-## Version history
-
-1.0.0 - initial version
-
-
+TODO
