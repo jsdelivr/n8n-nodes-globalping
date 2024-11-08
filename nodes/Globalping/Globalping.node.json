@@ -1,0 +1,19 @@
+{
+	"node": "n8n-nodes-globalping",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Development", "Developer Tools"],
+	"details": "The Globalping API node allows you to perform network measurements such as ping, traceroute, mtr, http and DNS lookups from a specified location. Use this node to test network connections or troubleshoot connectivity issues from various regions.",
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://globalping.io/docs/api.globalping.io#auth"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://globalping.io/docs/api.globalping.io"
+			}
+		]
+	}
+}
