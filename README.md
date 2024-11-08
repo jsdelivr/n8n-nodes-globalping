@@ -24,16 +24,18 @@ You can use this node to test network connections, do latency checks or troubles
 - The location field is smart enough to accept many different types of inputs. [Learn more about the magic location field](https://github.com/jsdelivr/globalping?tab=readme-ov-file#test-with-magic-).
 - While the Globalping network is large and is constantly expanding we can't guarantee a probe in every single location. [Explore our online probes on our website](https://globalping.io/network)
 
- 1. Measurements:
-   - ```Ping``` - Ping an endpoint using ICMP. Default 3 packets.
-   - ```Traceroute``` - Traceroute an endpoint using ICMP, TCP or UDP on any port. 
-   - ```DNS``` - Resolve a DNS record of any type. By default the local resolver is used but a different one can be provided. For troubleshooting purposes the `trace` function can be enabled.
-   - ```MTR``` - MTR an endpoint using ICMP, TCP or UDP on any port. 
-   - ```HTTP``` - Make an HTTP GET or HEAD request to any URL. Responses are limited to first 10kb. Note that the `Host` and `User-Agent` headers are reserved and internally overridden.
- 2. Probes
-	 - ```List``` - returns a list of all probes currently online and their metadata such as location and assigned tags.
- 3. Limits
-	 - ```List``` - returns rate limits for the current user if authenticated or IP address if not authenticated.
+ 	### Measurements:
+ 	- `Ping` - Ping an endpoint using ICMP. Default 3 packets.
+ 	- `Traceroute` - Traceroute an endpoint using ICMP, TCP or UDP on any port. 
+ 	- `DNS` - Resolve a DNS record of any type. By default the local resolver is used but a different one can be provided. For troubleshooting purposes the `trace` function can be enabled.
+ 	- `MTR` - MTR an endpoint using ICMP, TCP or UDP on any port. 
+ 	- `HTTP` - Make an HTTP GET or HEAD request to any URL. Responses are limited to first 10kb. Note that the `Host` and `User-Agent` headers are reserved and internally overridden.
+
+	 ### Probes:
+ 	- `List` - returns a list of all probes currently online and their metadata such as location and assigned tags.
+
+	 ### Limits:
+ 	- `List` - returns rate limits for the current user if authenticated or IP address if not authenticated.
 
 ## Credentials
 
