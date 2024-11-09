@@ -37,7 +37,7 @@ export const measurementsFields: INodeProperties[] = [
 		default: '',
 		required: true,
 		description:
-			'A publicly reachable measurement target. Typically a hostname, an IPv4 address, or IPv6 address, depending on the measurement type. Support for IPv6 targets is currently considered experimental.',
+			'A publicly reachable measurement target. Typically a hostname, an IPv4 address, or IPv6 address, depending on the measurement type.',
 		displayOptions: {
 			show: {
 				resource: ['measurements'],
@@ -83,7 +83,7 @@ export const measurementsFields: INodeProperties[] = [
 							'\n' +
 							'Note that only English variations of names are supported.',
 						default: '',
-						placeholder: 'Poland+Google+aws-us-east-1',
+						placeholder: 'World',
 					},
 				],
 			},
@@ -94,7 +94,7 @@ export const measurementsFields: INodeProperties[] = [
 		name: 'measurementLimit',
 		type: 'number',
 		description:
-			"The maximum number of probes that should run the measurement. The result count might be lower if there aren't enough probes available in the specified locations. Mutually exclusive with the limit property that can be set for individual locations.\n" +
+			"The maximum number of probes that should run the measurement. The result count might be lower if there aren't enough probes available in the specified locations. \n" +
 			'\n' +
 			'Constraints: Min 1┃Max 500 Default: 1',
 		default: 1,

@@ -4,24 +4,24 @@ export const httpOptions = [
 	{
 		name: 'HTTP',
 		value: 'measurementHttp',
-		action: 'Creates a new http measurement and returns the status and results',
+		action: 'HTTP Request. GET or HEAD, raw output, latency and TLS data. Limited to 10kb.',
 	},
 ];
 
 export const httpFields: INodeProperties[] = [
 	{
-		displayName: 'Http Options',
+		displayName: 'HTTP Options',
 		name: 'measurementOptions',
 		type: 'collection',
 		default: {},
-		description: 'Additional optional fields depending on the measurement type',
+		description: 'Additional optional settings',
 		options: [
 			{
 				displayName: 'IP Version',
 				name: 'ipVersion',
 				type: 'options',
 				description:
-					'EXPERIMENTAL: The IP version to use. Only allowed if the target is a hostname.' +
+					'The IP version to use. Only allowed if the target is a hostname.' +
 					'\n' +
 					'Allowed: 4┃6',
 				options: [
@@ -165,14 +165,14 @@ export const httpFields: INodeProperties[] = [
 				name: 'resolver',
 				type: 'string',
 				description:
-					'A DNS resolver to use for the query. Defaults to the probe system resolver.\n' +
+					'The DNS resolver to use for the query. Defaults to the local resolver.\n' +
 					'\n' +
 					'ANY OF\n' +
 					'1 ipv4\n' +
 					'The IPv4 address of the resolver.\n' +
 					'\n' +
 					'2 ipv6\n' +
-					'EXPERIMENTAL: The IPv6 address of the resolver.\n' +
+					'The IPv6 address of the resolver.\n' +
 					'\n' +
 					'3 hostname\n' +
 					'The Fully Qualified Domain Name (FQDN) of the resolver.',

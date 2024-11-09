@@ -4,7 +4,7 @@ export const tracerouteOptions = [
 	{
 		name: 'Traceroute',
 		value: 'measurementTraceroute',
-		action: 'Creates a new traceroute measurement and returns the status and results',
+		action: 'Traceroute. Raw output, latency data, all protocols and ports.',
 	},
 ];
 
@@ -14,7 +14,7 @@ export const tracerouteFields: INodeProperties[] = [
 		name: 'measurementOptions',
 		type: 'collection',
 		default: {},
-		description: 'Additional optional fields depending on the measurement type',
+		description: 'Additional optional settings',
 		options: [
 			{
 				displayName: 'Port',
@@ -57,7 +57,7 @@ export const tracerouteFields: INodeProperties[] = [
 				name: 'ipVersion',
 				type: 'options',
 				description:
-					'EXPERIMENTAL: The IP version to use. Only allowed if the target is a hostname.' +
+					'The IP version to use. Only allowed if the target is a hostname.' +
 					'\n' +
 					'Allowed: 4┃6',
 				options: [

@@ -4,7 +4,7 @@ export const dnsOptions = [
 	{
 		name: 'DNS',
 		value: 'measurementDns',
-		action: 'Creates a new dns measurement and returns the status and results',
+		action: 'DNS resolve. All types, latency data and optional tracing.',
 	},
 ];
 
@@ -14,14 +14,14 @@ export const dnsFields: INodeProperties[] = [
 		name: 'measurementOptions',
 		type: 'collection',
 		default: {},
-		description: 'Additional optional fields depending on the measurement type',
+		description: 'Additional optional settings',
 		options: [
 			{
 				displayName: 'IP Version',
 				name: 'ipVersion',
 				type: 'options',
 				description:
-					'EXPERIMENTAL: The IP version to use. Only allowed if the target is a hostname.' +
+					'The IP version to use. Only allowed if the target is a hostname.' +
 					'\n' +
 					'Allowed: 4┃6',
 				options: [
@@ -54,7 +54,7 @@ export const dnsFields: INodeProperties[] = [
 				displayName: 'Protocol',
 				name: 'protocol',
 				type: 'options',
-				description: 'The transport protocol to use.\n' + '\n' + 'Default: TCP Allowed: TCP┃UDP',
+				description: 'The transport protocol to use.\n' + '\n' + 'Default: UDP Allowed: TCP┃UDP',
 				options: [
 					{
 						name: 'TCP',
@@ -65,10 +65,10 @@ export const dnsFields: INodeProperties[] = [
 						value: 'UDP',
 					},
 				],
-				default: 'TCP',
+				default: 'UDP',
 			},
 			{
-				displayName: 'Query',
+				displayName: 'Query Type',
 				name: 'query',
 				type: 'collection',
 				default: {},
@@ -153,14 +153,14 @@ export const dnsFields: INodeProperties[] = [
 				name: 'resolver',
 				type: 'string',
 				description:
-					'A DNS resolver to use for the query. Defaults to the probe system resolver.\n' +
+					'The DNS resolver to use for the query. Defaults to the local resolver.\n' +
 					'\n' +
 					'ANY OF\n' +
 					'1 ipv4\n' +
 					'The IPv4 address of the resolver.\n' +
 					'\n' +
 					'2 ipv6\n' +
-					'EXPERIMENTAL: The IPv6 address of the resolver.\n' +
+					'The IPv6 address of the resolver.\n' +
 					'\n' +
 					'3 hostname\n' +
 					'The Fully Qualified Domain Name (FQDN) of the resolver.',

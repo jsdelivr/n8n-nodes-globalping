@@ -3,7 +3,7 @@
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Development", "Developer Tools"],
-	"details": "The Globalping API node allows you to perform network measurements such as ping, traceroute, mtr, http and DNS lookups from a specified location. Use this node to test network connections or troubleshoot connectivity issues from various regions.",
+	"details": "The Globalping community node allows you to perform network measurements such as ping, traceroute, mtr, http and DNS lookups from thousands of globally distributed locations. Use this node to test network connections, get latency data, test DNS propagation or troubleshoot connectivity issues from various regions.",
 	"resources": {
 		"credentialDocumentation": [
 			{
