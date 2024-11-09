@@ -1,11 +1,11 @@
-# workflow for manual publishing to NPM
-name: Publish NPM
+# workflow for test and lint every commit pushed
+name: Test and lint
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
-  publish:
-    name: publish
+  test:
+    name: test_and_lint
     runs-on: ubuntu-latest
     environment: publish
 
@@ -23,10 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pnpm install
+          pnpm i
 
-      - name: Publish to NPM
+      - name: Lint
         run: |
-          bash .bin/publish_npm
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          pnpm lint

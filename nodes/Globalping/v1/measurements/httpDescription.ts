@@ -78,6 +78,14 @@ export const httpFields: INodeProperties[] = [
 				description: 'The HTTP request properties',
 				options: [
 					{
+						displayName: 'URL',
+						name: 'url',
+						type: 'string',
+						description: 'Provide a URL as is',
+						default: '',
+						placeholder: 'https://example.com/path/?query=string',
+					},
+					{
 						displayName: 'Headers',
 						name: 'headersUi',
 						placeholder: 'Add header',
@@ -111,7 +119,7 @@ export const httpFields: INodeProperties[] = [
 							},
 						],
 					},
-					{
+					/*{
 						displayName: 'Host',
 						name: 'host',
 						type: 'string',
@@ -149,7 +157,7 @@ export const httpFields: INodeProperties[] = [
 						type: 'string',
 						description: 'The query string portion of the URL',
 						default: '',
-					},
+					},*/
 				],
 			},
 			{

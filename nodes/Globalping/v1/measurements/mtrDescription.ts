@@ -74,7 +74,7 @@ export const mtrFields: INodeProperties[] = [
 			},
 			{
 				displayName: 'Packets',
-				name: 'packetss',
+				name: 'packets',
 				type: 'number',
 				description:
 					'The number of packets to send.\n' + '\n' + 'Constraints: Min 1┃Max 16 Default: 3',
