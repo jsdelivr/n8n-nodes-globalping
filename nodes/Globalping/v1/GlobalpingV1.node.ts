@@ -11,7 +11,7 @@ import {
 
 import { probesFields, probesOperations } from './ProbesDescription';
 import { limitsFields, limitsOperations } from './LimitsDescription';
-import { globalpingApiRequest } from '../GenericFunctions';
+import { globalpingApiRequest, parseMeasurementTarget } from '../GenericFunctions';
 import { measurementsFields, measurementsOperations } from './MeasurementsDescription';
 import {
 	DnsOptions,
@@ -47,6 +47,7 @@ const versionDescription: INodeTypeDescription = {
 			displayName: 'Authentication',
 			name: 'useToken',
 			type: 'boolean',
+			description: 'Whether to use a token for requests. If disabled, requests will not include a token.',
 			default: false,
 		},
 		{
@@ -137,6 +138,7 @@ export class GlobalpingV1 implements INodeType {
 					let requestBody = {} as MeasurementRequestBody;
 
 					requestBody.target = params.measurementTarget as string;
+					const parsedTarget = parseMeasurementTarget(params.measurementTarget);
 
 					if (params.measurementLocationsUi) {
 						if (params.measurementLocationsUi.measurementLocations) {
@@ -159,12 +161,8 @@ export class GlobalpingV1 implements INodeType {
 						requestBody.type = 'ping';
 						let measurementOptions = {} as PingOptions;
 
-						if (params.measurementOptions.packets && params.measurementOptions.packets !== 3) {
-							measurementOptions.packets = params.measurementOptions.packets;
-						}
-
-						if (params.measurementOptions.ipVersion && params.measurementOptions.ipVersion !== 4) {
-							measurementOptions.ipVersion = params.measurementOptions.ipVersion;
+						if (params.packets && params.packets !== 3) {
+							measurementOptions.packets = params.packets;
 						}
 
 						if (Object.keys(measurementOptions).length > 0) {
@@ -187,10 +185,6 @@ export class GlobalpingV1 implements INodeType {
 							measurementOptions.protocol = params.measurementOptions.protocol;
 						}
 
-						if (params.measurementOptions.ipVersion && params.measurementOptions.ipVersion !== 4) {
-							measurementOptions.ipVersion = params.measurementOptions.ipVersion;
-						}
-
 						if (Object.keys(measurementOptions).length > 0) {
 							requestBody.measurementOptions = measurementOptions;
 						}
@@ -200,31 +194,16 @@ export class GlobalpingV1 implements INodeType {
 						requestBody.type = 'dns';
 						let measurementOptions = {} as DnsOptions;
 
-						if (params.measurementOptions.query) {
-							if (
-								params.measurementOptions.query.type &&
-								params.measurementOptions.query.type !== 'A'
-							)
-								measurementOptions.query.type = params.measurementOptions.query.type;
-						}
-
-						if (params.measurementOptions.port && params.measurementOptions.port !== 53) {
-							measurementOptions.port = params.measurementOptions.port;
-						}
-
 						if (
-							params.measurementOptions.protocol &&
-							params.measurementOptions.protocol !== 'TCP'
+							params.measurementOptions.queryType &&
+							params.measurementOptions.queryType !== 'A'
 						) {
-							measurementOptions.protocol = params.measurementOptions.protocol;
+							measurementOptions.query = {} as DnsOptions['query'];
+							measurementOptions.query.type = params.measurementOptions.queryType;
 						}
 
-						if (params.measurementOptions.ipVersion && params.measurementOptions.ipVersion !== 4) {
-							measurementOptions.ipVersion = params.measurementOptions.ipVersion;
-						}
-
-						if (params.measurementOptions.trace) {
-							measurementOptions.trace = params.measurementOptions.trace;
+						if (params.measurementOptions.resolver && params.measurementOptions.resolver !== '') {
+							measurementOptions.resolver = params.measurementOptions.resolver;
 						}
 
 						if (Object.keys(measurementOptions).length > 0) {
@@ -242,13 +221,9 @@ export class GlobalpingV1 implements INodeType {
 
 						if (
 							params.measurementOptions.protocol &&
-							params.measurementOptions.protocol !== 'TCP'
+							params.measurementOptions.protocol !== 'ICMP'
 						) {
 							measurementOptions.protocol = params.measurementOptions.protocol;
-						}
-
-						if (params.measurementOptions.ipVersion && params.measurementOptions.ipVersion !== 4) {
-							measurementOptions.ipVersion = params.measurementOptions.ipVersion;
 						}
 
 						if (params.measurementOptions.packets && params.measurementOptions.packets !== 3) {
@@ -263,52 +238,40 @@ export class GlobalpingV1 implements INodeType {
 					if (operation === 'measurementHttp') {
 						requestBody.type = 'http';
 						let measurementOptions = {} as HttpOptions;
-						measurementOptions.request = {} as any;
-						if (params.measurementOptions.request) {
-							if (params.measurementOptions.request.url) {
-								let url = new URL(params.measurementOptions.request.url);
-								measurementOptions.request.host = url.hostname;
-								measurementOptions.request.path = url.pathname;
-								measurementOptions.request.query = url.search;
-							}
+						measurementOptions.request = {} as HttpOptions['request'];
 
-							if (
-								params.measurementOptions.request.method &&
-								params.measurementOptions.request.method !== 'HEAD'
-							) {
-								measurementOptions.request.method = params.measurementOptions.request.method;
-							}
+						measurementOptions.request.host = parsedTarget.host;
+						measurementOptions.request.path = parsedTarget.path;
+						measurementOptions.port = parsedTarget.port;
 
-							if (params.measurementOptions.request.headersUi) {
-								if (params.measurementOptions.request.headersUi.headers) {
-									let headers: {
-										[K: string]: string;
-									} = {};
-									for (let header of params.measurementOptions.request.headersUi.headers) {
-										if (header.key !== '') {
-											headers[header.key] = header.value;
-										}
-									}
-									if (Object.keys(headers).length > 0) {
-										measurementOptions.request.headers = headers;
+						if (parsedTarget.query !== '') {
+							measurementOptions.request.query = parsedTarget.query;
+						}
+
+						if (parsedTarget.type === 'ipv4') {
+							measurementOptions.ipVersion = 4;
+						} else if (parsedTarget.type === 'ipv6') {
+							measurementOptions.ipVersion = 6;
+						}
+
+						if (params.measurementOptions.method && params.measurementOptions.method !== 'HEAD') {
+							measurementOptions.request.method = params.measurementOptions.method;
+						}
+
+						if (params.measurementOptions.headersUi) {
+							if (params.measurementOptions.headersUi.headers) {
+								let headers: {
+									[K: string]: string;
+								} = {};
+								for (let header of params.measurementOptions.headersUi.headers) {
+									if (header.key !== '') {
+										headers[header.key] = header.value;
 									}
 								}
+								if (Object.keys(headers).length > 0) {
+									measurementOptions.request.headers = headers;
+								}
 							}
-						}
-
-						if (params.measurementOptions.resolver && params.measurementOptions.resolver !== '') {
-							measurementOptions.resolver = params.measurementOptions.resolver;
-						}
-
-						if (
-							params.measurementOptions.protocol &&
-							params.measurementOptions.protocol !== 'HTTP'
-						) {
-							measurementOptions.protocol = params.measurementOptions.protocol;
-						}
-
-						if (params.measurementOptions.ipVersion && params.measurementOptions.ipVersion !== 4) {
-							measurementOptions.ipVersion = params.measurementOptions.ipVersion;
 						}
 
 						if (Object.keys(measurementOptions).length > 0) {

@@ -52,26 +52,6 @@ export const tracerouteFields: INodeProperties[] = [
 				],
 				default: 'ICMP',
 			},
-			{
-				displayName: 'IP Version',
-				name: 'ipVersion',
-				type: 'options',
-				description:
-					'The IP version to use. Only allowed if the target is a hostname.' +
-					'\n' +
-					'Allowed: 4┃6',
-				options: [
-					{
-						name: '4',
-						value: 4,
-					},
-					{
-						name: '6',
-						value: 6,
-					},
-				],
-				default: 4,
-			},
 		],
 		displayOptions: {
 			show: {

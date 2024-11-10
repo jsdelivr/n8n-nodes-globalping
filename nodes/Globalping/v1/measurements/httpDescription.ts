@@ -17,166 +17,55 @@ export const httpFields: INodeProperties[] = [
 		description: 'Additional optional settings',
 		options: [
 			{
-				displayName: 'IP Version',
-				name: 'ipVersion',
+				displayName: 'Method',
+				name: 'method',
 				type: 'options',
-				description:
-					'The IP version to use. Only allowed if the target is a hostname.' +
-					'\n' +
-					'Allowed: 4┃6',
+				description: 'The HTTP method to use.\n' + '\n' + 'Default: HEAD Allowed: HEAD┃GET',
 				options: [
 					{
-						name: '4',
-						value: 4,
+						name: 'HEAD',
+						value: 'HEAD',
 					},
 					{
-						name: '6',
-						value: 6,
+						name: 'GET',
+						value: 'GET',
 					},
 				],
-				default: 4,
+				default: 'HEAD',
 			},
 			{
-				displayName: 'Port',
-				name: 'port',
-				type: 'number',
+				displayName: 'Headers',
+				name: 'headersUi',
+				placeholder: 'Add header',
+				type: 'fixedCollection',
 				description:
-					'The port number to use.\n' + '\n' + 'Constraints: Min 0┃Max 65535 Default: 80',
-				default: 80,
-				typeOptions: {
-					maxValue: 65535,
-					minValue: 0,
-				},
-			},
-			{
-				displayName: 'Protocol',
-				name: 'protocol',
-				type: 'options',
-				description:
-					'The transport protocol to use.\n' + '\n' + 'Default: HTTPS Allowed: HTTP┃HTTPS┃HTTP2',
-				options: [
-					{
-						name: 'HTTP',
-						value: 'HTTP',
-					},
-					{
-						name: 'HTTPS',
-						value: 'HTTPS',
-					},
-					{
-						name: 'HTTP2',
-						value: 'HTTP2',
-					},
-				],
-				default: 'HTTP',
-			},
-			{
-				displayName: 'Request',
-				name: 'request',
-				type: 'collection',
+					'Additional request headers. Note that the Host and User-Agent are reserved and internally overridden.',
 				default: {},
-				description: 'The HTTP request properties',
+				typeOptions: {
+					multipleValues: true,
+				},
 				options: [
 					{
-						displayName: 'URL',
-						name: 'url',
-						type: 'string',
-						description: 'Provide a URL as is',
-						default: '',
-						placeholder: 'https://example.com/path/?query=string',
-					},
-					{
+						name: 'headers',
 						displayName: 'Headers',
-						name: 'headersUi',
-						placeholder: 'Add header',
-						type: 'fixedCollection',
-						description:
-							'Additional request headers. Note that the Host and User-Agent are reserved and internally overridden.',
-						default: {},
-						typeOptions: {
-							multipleValues: true,
-						},
-						options: [
+						values: [
 							{
-								name: 'headers',
-								displayName: 'Headers',
-								values: [
-									{
-										displayName: 'Key',
-										name: 'key',
-										type: 'string',
-										description: 'Header key',
-										default: '',
-									},
-									{
-										displayName: 'Value',
-										name: 'value',
-										type: 'string',
-										description: 'Header value',
-										default: '',
-									},
-								],
+								displayName: 'Key',
+								name: 'key',
+								type: 'string',
+								description: 'Header key',
+								default: '',
+							},
+							{
+								displayName: 'Value',
+								name: 'value',
+								type: 'string',
+								description: 'Header value',
+								default: '',
 							},
 						],
 					},
-					/*{
-						displayName: 'Host',
-						name: 'host',
-						type: 'string',
-						description:
-							'An optional override for the Host header. The default value is based on the target.',
-						default: '',
-					},
-					{
-						displayName: 'Method',
-						name: 'method',
-						type: 'options',
-						description: 'The HTTP method to use.\n' + '\n' + 'Default: HEAD Allowed: HEAD┃GET',
-						options: [
-							{
-								name: 'HEAD',
-								value: 'HEAD',
-							},
-							{
-								name: 'GET',
-								value: 'GET',
-							},
-						],
-						default: 'GET',
-					},
-					{
-						displayName: 'Path',
-						name: 'path',
-						type: 'string',
-						description: 'The path portion of the URL',
-						default: '',
-					},
-					{
-						displayName: 'Query',
-						name: 'query',
-						type: 'string',
-						description: 'The query string portion of the URL',
-						default: '',
-					},*/
 				],
-			},
-			{
-				displayName: 'Resolver',
-				name: 'resolver',
-				type: 'string',
-				description:
-					'The DNS resolver to use for the query. Defaults to the local resolver.\n' +
-					'\n' +
-					'ANY OF\n' +
-					'1 ipv4\n' +
-					'The IPv4 address of the resolver.\n' +
-					'\n' +
-					'2 ipv6\n' +
-					'The IPv6 address of the resolver.\n' +
-					'\n' +
-					'3 hostname\n' +
-					'The Fully Qualified Domain Name (FQDN) of the resolver.',
-				default: '',
 			},
 		],
 		displayOptions: {

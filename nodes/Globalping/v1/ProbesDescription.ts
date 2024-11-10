@@ -15,8 +15,7 @@ export const probesOperations: INodeProperties[] = [
 			{
 				name: 'List',
 				value: 'list',
-				action:
-					'Returns a list of all probes currently online and their metadata such as location and assigned tags. For advanced use-cases.',
+				action: 'Returns a list of all probes currently online and their metadata such as location and assigned tags for advanced use cases',
 			},
 		],
 		default: 'list',

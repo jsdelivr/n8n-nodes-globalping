@@ -1748,3 +1748,12 @@ export type TlsCertificate = {
 	 * */
 	publicKey: string | null;
 };
+
+export type ParsedTarget = {
+	type: 'url' | 'ipv4' | 'ipv6';
+	protocol: string;
+	host: string;
+	port: number;
+	path: string;
+	query: string;
+};
