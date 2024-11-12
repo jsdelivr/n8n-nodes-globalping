@@ -46,6 +46,9 @@ To take advantage of the higher limits you need to generate a token in the dashb
 
 ## Usage
 
- Create a workflow and add Globalping node with operation you need.
+ Create a workflow and add Globalping node with operation you need. Make sure to enable "Authentication" in each step if you have provided your token and want to use it.
 
-TODO
+ <img width="1920" alt="globalping n8n usage" src="https://github.com/user-attachments/assets/09021705-4e78-4973-866d-92291b659fd4">
+
+
+
