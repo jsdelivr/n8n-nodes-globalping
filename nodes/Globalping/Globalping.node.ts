@@ -1,7 +1,7 @@
 import type { INodeTypeBaseDescription, IVersionedNodeType } from 'n8n-workflow';
 import { VersionedNodeType } from 'n8n-workflow';
 
-import { GlobalpingV1 } from './v1/GlobalpingV1.node';
+import { Globalping as GlobalpingV1 } from './v1/Globalping.node';
 
 export class Globalping extends VersionedNodeType {
 	constructor() {

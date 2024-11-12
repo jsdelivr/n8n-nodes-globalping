@@ -80,7 +80,7 @@ const versionDescription: INodeTypeDescription = {
 	],
 };
 
-export class GlobalpingV1 implements INodeType {
+export class Globalping implements INodeType {
 	description: INodeTypeDescription;
 
 	constructor(baseDescription: INodeTypeBaseDescription) {
