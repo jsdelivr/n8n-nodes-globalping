@@ -137,7 +137,9 @@ export class GlobalpingV1 implements INodeType {
 
 					let requestBody = {} as MeasurementRequestBody;
 
-					const parsedTarget = parseMeasurementTarget(this.getNodeParameter('measurementTarget', i) as string);
+					const parsedTarget = parseMeasurementTarget(
+						this.getNodeParameter('measurementTarget', i) as string,
+					);
 
 					requestBody.target = parsedTarget.host;
 
@@ -161,7 +163,7 @@ export class GlobalpingV1 implements INodeType {
 
 					let measurementLimit = this.getNodeParameter('measurementLimit', i) as number;
 
-					if(measurementLimit && measurementLimit !== 1) {
+					if (measurementLimit && measurementLimit !== 1) {
 						requestBody.limit = measurementLimit;
 					}
 
@@ -181,16 +183,14 @@ export class GlobalpingV1 implements INodeType {
 					if (operation === 'measurementTraceroute') {
 						requestBody.type = 'traceroute';
 						let measurementOptions = {} as TracerouteOptions;
+						let moValues = this.getNodeParameter('measurementOptions', i) as any;
 
-						if (params.measurementOptions.port && params.measurementOptions.port !== 80) {
-							measurementOptions.port = (this.getNodeParameter('measurementOptions', i) as any).port;
+						if (moValues.port && moValues.port !== 80) {
+							measurementOptions.port = moValues.port;
 						}
 
-						if (
-							params.measurementOptions.protocol &&
-							params.measurementOptions.protocol !== 'ICMP'
-						) {
-							measurementOptions.protocol = (this.getNodeParameter('measurementOptions', i) as any).protocol;
+						if (moValues.protocol && moValues.protocol !== 'ICMP') {
+							measurementOptions.protocol = moValues.protocol;
 						}
 
 						if (Object.keys(measurementOptions).length > 0) {
@@ -201,17 +201,15 @@ export class GlobalpingV1 implements INodeType {
 					if (operation === 'measurementDns') {
 						requestBody.type = 'dns';
 						let measurementOptions = {} as DnsOptions;
+						let moValues = this.getNodeParameter('measurementOptions', i) as any;
 
-						if (
-							params.measurementOptions.queryType &&
-							params.measurementOptions.queryType !== 'A'
-						) {
+						if (moValues.queryType && moValues.queryType !== 'A') {
 							measurementOptions.query = {} as DnsOptions['query'];
-							measurementOptions.query.type = (this.getNodeParameter('measurementOptions', i) as any).queryType;
+							measurementOptions.query.type = moValues.queryType;
 						}
 
-						if (params.measurementOptions.resolver && params.measurementOptions.resolver !== '') {
-							measurementOptions.resolver = (this.getNodeParameter('measurementOptions', i) as any).resolver;
+						if (moValues.resolver && moValues.resolver !== '') {
+							measurementOptions.resolver = moValues.resolver;
 						}
 
 						if (Object.keys(measurementOptions).length > 0) {
@@ -222,20 +220,18 @@ export class GlobalpingV1 implements INodeType {
 					if (operation === 'measurementMtr') {
 						requestBody.type = 'mtr';
 						let measurementOptions = {} as MtrOptions;
+						let moValues = this.getNodeParameter('measurementOptions', i) as any;
 
-						if (params.measurementOptions.port && params.measurementOptions.port !== 80) {
-							measurementOptions.port = (this.getNodeParameter('measurementOptions', i) as any).port;
+						if (moValues.port && moValues.port !== 80) {
+							measurementOptions.port = moValues.port;
 						}
 
-						if (
-							params.measurementOptions.protocol &&
-							params.measurementOptions.protocol !== 'ICMP'
-						) {
-							measurementOptions.protocol = (this.getNodeParameter('measurementOptions', i) as any).protocol;
+						if (moValues.protocol && moValues.protocol !== 'ICMP') {
+							measurementOptions.protocol = moValues.protocol;
 						}
 
-						if (params.measurementOptions.packets && params.measurementOptions.packets !== 3) {
-							measurementOptions.packets = (this.getNodeParameter('measurementOptions', i) as any).packets;
+						if (moValues.packets && moValues.packets !== 3) {
+							measurementOptions.packets = moValues.packets;
 						}
 
 						if (Object.keys(measurementOptions).length > 0) {
@@ -246,6 +242,8 @@ export class GlobalpingV1 implements INodeType {
 					if (operation === 'measurementHttp') {
 						requestBody.type = 'http';
 						let measurementOptions = {} as HttpOptions;
+						let moValues = this.getNodeParameter('measurementOptions', i) as any;
+
 						measurementOptions.request = {} as HttpOptions['request'];
 
 						measurementOptions.request.host = parsedTarget.host;
@@ -262,17 +260,16 @@ export class GlobalpingV1 implements INodeType {
 							measurementOptions.ipVersion = 6;
 						}
 
-						if (params.measurementOptions.method && params.measurementOptions.method !== 'HEAD') {
-							measurementOptions.request.method = (this.getNodeParameter('measurementOptions', i) as any).method;
+						if (moValues.method && moValues.method !== 'HEAD') {
+							measurementOptions.request.method = moValues.method;
 						}
 
-						let headersUi = (this.getNodeParameter('measurementOptions', i) as any).headersUi;
-						if (headersUi) {
-							if (headersUi.headers) {
+						if (moValues.headersUi) {
+							if (moValues.headersUi.headers) {
 								let headers: {
 									[K: string]: string;
 								} = {};
-								for (let header of headersUi.headers) {
+								for (let header of moValues.headersUi.headers) {
 									if (header.key !== '') {
 										headers[header.key] = header.value;
 									}

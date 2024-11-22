@@ -29,7 +29,7 @@ export async function globalpingApiRequest(
 
 	const options: IHttpRequestOptions = {
 		headers: {
-			'User-Agent': 'n8n-node'
+			'User-Agent': 'n8n-node',
 		},
 		method,
 		body,
