@@ -183,14 +183,14 @@ export class GlobalpingV1 implements INodeType {
 						let measurementOptions = {} as TracerouteOptions;
 
 						if (params.measurementOptions.port && params.measurementOptions.port !== 80) {
-							measurementOptions.port = (this.getNodeParameter('measurementOptions', i) as object).port;
+							measurementOptions.port = (this.getNodeParameter('measurementOptions', i) as any).port;
 						}
 
 						if (
 							params.measurementOptions.protocol &&
 							params.measurementOptions.protocol !== 'ICMP'
 						) {
-							measurementOptions.protocol = (this.getNodeParameter('measurementOptions', i) as object).protocol;
+							measurementOptions.protocol = (this.getNodeParameter('measurementOptions', i) as any).protocol;
 						}
 
 						if (Object.keys(measurementOptions).length > 0) {
