@@ -137,8 +137,8 @@ export class GlobalpingV1 implements INodeType {
 
 					let requestBody = {} as MeasurementRequestBody;
 
-					requestBody.target = params.measurementTarget as string;
-					const parsedTarget = parseMeasurementTarget(params.measurementTarget);
+					const parsedTarget = parseMeasurementTarget(this.getNodeParameter('measurementTarget', 0) as string);
+
 					requestBody.target = parsedTarget.host;
 
 					if (params.measurementLocationsUi) {

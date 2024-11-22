@@ -28,7 +28,9 @@ export async function globalpingApiRequest(
 	const useToken = this.getNodeParameter('useToken', 0) as string;
 
 	const options: IHttpRequestOptions = {
-		headers: {},
+		headers: {
+			'User-Agent': 'n8n-node'
+		},
 		method,
 		body,
 		qs: query,
