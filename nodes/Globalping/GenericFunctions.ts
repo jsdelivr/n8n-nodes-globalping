@@ -10,6 +10,7 @@ import type {
 } from 'n8n-workflow';
 import { URL } from 'url';
 import { ParsedTarget } from './types';
+import { version } from '../../package.json';
 
 export async function globalpingApiRequest(
 	this:
@@ -28,7 +29,9 @@ export async function globalpingApiRequest(
 	const useToken = this.getNodeParameter('useToken', 0) as string;
 
 	const options: IHttpRequestOptions = {
-		headers: {},
+		headers: {
+			'User-Agent': `n8n-community-node (v${version})`,
+		},
 		method,
 		body,
 		qs: query,

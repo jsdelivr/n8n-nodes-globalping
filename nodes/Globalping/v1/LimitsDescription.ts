@@ -15,7 +15,8 @@ export const limitsOperations: INodeProperties[] = [
 			{
 				name: 'List',
 				value: 'list',
-				action: 'Returns rate limits for the current user if authenticated or IP address if not authenticated',
+				action:
+					'Returns rate limits for the current user if authenticated or IP address if not authenticated',
 			},
 		],
 		default: 'list',
