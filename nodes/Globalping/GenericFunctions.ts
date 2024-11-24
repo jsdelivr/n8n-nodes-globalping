@@ -10,7 +10,7 @@ import type {
 } from 'n8n-workflow';
 import { URL } from 'url';
 import { ParsedTarget } from './types';
-import {version} from "../../package.json";
+import { version } from '../../package.json';
 
 export async function globalpingApiRequest(
 	this:

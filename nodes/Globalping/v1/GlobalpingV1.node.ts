@@ -47,7 +47,8 @@ const versionDescription: INodeTypeDescription = {
 			displayName: 'Authentication',
 			name: 'useToken',
 			type: 'boolean',
-			description: 'Whether to use a token for requests. If disabled, requests will not include a token.',
+			description:
+				'Whether to use a token for requests. If disabled, requests will not include a token.',
 			default: false,
 		},
 		{
