@@ -1,7 +1,7 @@
 {
   "name": "@globalping/n8n-nodes-globalping",
   "version": "1.0.4",
-  "description": "The Globalping n8n node allows you to perform network measurements such as ping, traceroute, mtr, http and DNS lookups from thousands of locations around the world. Test your website, get your DNS latency, monitor your CDN performance or build your own uptime monitoring service.",
+  "description": "The Globalping n8n node allows you to perform network measurements such as ping, traceroute, mtr, http and DNS lookups from thousands of locations around the world.",
   "keywords": [
     "n8n",
     "node",
