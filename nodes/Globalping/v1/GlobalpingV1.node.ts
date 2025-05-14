@@ -6,6 +6,7 @@ import {
 	type INodeType,
 	type INodeTypeBaseDescription,
 	type INodeTypeDescription,
+	NodeConnectionType,
 	sleep,
 } from 'n8n-workflow';
 
@@ -34,8 +35,8 @@ const versionDescription: INodeTypeDescription = {
 	defaults: {
 		name: 'Globalping',
 	},
-	inputs: ['main'],
-	outputs: ['main'],
+	inputs: [NodeConnectionType.Main],
+	outputs: [NodeConnectionType.Main],
 	credentials: [
 		{
 			name: 'globalpingApi',
