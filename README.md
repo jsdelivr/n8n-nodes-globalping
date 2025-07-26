@@ -1,5 +1,7 @@
 # @globalping/n8n-nodes-globalping
-This is an n8n community node. It lets you use [Globalping](https://globalping.io/) in your n8n workflows.
+The official [Globalping](https://globalping.io/) integration for your n8n workflows.
+
+It supports both self-hosted and cloud n8n instances thanks to our [verified integration](https://n8n.io/integrations/globalping/).
 
 The Globalping node allows you to perform network measurements such as `ping`, `traceroute`, `mtr`, `http` and `DNS` lookups from a specified location. 
 You can use this node to test network connections, do latency checks or troubleshoot connectivity issues from various regions.
@@ -9,7 +11,16 @@ You can use this node to test network connections, do latency checks or troubles
 [Credentials](#credentials)
 [Usage](#usage) 
 
-## Installation
+## Installation - Recommended
+
+1. Open the editor, and click + in the top right to open the Nodes panel
+2. Search for Globalping using the search bar and click install.
+3. Once Globalping is installed, just drag, drop, and connect it like any other node in a workflow.
+
+<img width="769" height="436" alt="globalping-n8n" src="https://github.com/user-attachments/assets/a4014755-3af0-4ff4-aa79-8eccc1efbc1d" />
+
+
+## Installation - NPM based
 
 1. Go to n8n Settings in bottom left
 2. Select "Community nodes"
