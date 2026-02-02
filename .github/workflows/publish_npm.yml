@@ -8,6 +8,9 @@ jobs:
     name: publish
     runs-on: ubuntu-latest
     environment: publish
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Check out commit
@@ -17,9 +20,10 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Set up Node 18
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: |
@@ -28,5 +32,3 @@ jobs:
       - name: Publish to NPM
         run: |
           bash .bin/publish_npm
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
