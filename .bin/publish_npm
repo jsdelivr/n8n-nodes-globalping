@@ -2,8 +2,6 @@
 
 set -eux
 
-npm config set '//registry.npmjs.org/:_authToken' "$NPM_TOKEN"
-
 # Build the project
 npm run build
 
@@ -18,5 +16,5 @@ else
   TAG="latest"
 fi
 
-# Publish with the appropriate tag
-npm publish --access public --tag "$TAG"
+# Publish with the appropriate tag and provenance
+npm publish --access public --tag "$TAG" --provenance
